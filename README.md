@@ -19,7 +19,7 @@ sequenceDiagram
     loop 1. Pre-process the knowledge base
         OR Server->>OR Server: Chunk .pdf files into sections
         loop 2. Create & store embeddings
-            Vercel->>OpenAI (API): create embedding for pdf section
+            OR Server->>OpenAI (API): create embedding for pdf section
             OpenAI (API)->>OR Server: embedding vector(1536)
             OR Server->>DB (pgvector): store embedding for page section
         end
