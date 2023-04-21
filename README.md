@@ -1,10 +1,6 @@
 # OpenReview ChatGPT Powered Research Assistant
 
-This starter takes all the `.mdx` files in the `pages` directory and processes them to use as custom context within [OpenAI Text Completion](https://platform.openai.com/docs/guides/completion) prompts.
-
-## Technical Details
-
-Building your own custom ChatGPT involves four steps:
+Building the research assistant involves four steps:
 
 1. Pre-process the accepted submissions of major venues
 2. Store embeddings in Postgres with [pgvector](https://supabase.com/docs/guides/database/extensions/pgvector).
