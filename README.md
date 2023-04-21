@@ -19,9 +19,9 @@ sequenceDiagram
     loop 1. Pre-process the knowledge base
         OR Server->>OR Server: Chunk .pdf files into sections
         loop 2. Create & store embeddings
-            OR Server->>OpenAI (API): create embedding for pdf section
+            OR Server->>OpenAI (API): request embedding for pdf section
             OpenAI (API)->>OR Server: embedding vector(1536)
-            OR Server->>DB (pgvector): store embedding for page section
+            OR Server->>DB (pgvector): store embedding for pdf section
         end
     end
 ```
@@ -38,13 +38,13 @@ sequenceDiagram
     participant OpenAI (API)
     Client->>OR Server: { query: lorem ispum }
     critical 3. Perform vector similarity search
-        OR Server->>OpenAI (API): create embedding for query
+        OR Server->>OpenAI (API): request embedding for query
         OpenAI (API)->>OR Server: embedding vector(1536)
         OR Server->>DB (pgvector): vector similarity search
         DB (pgvector)->>OR Server: relevant pdf content
     end
     critical 4. Inject content into prompt
-        OR Server->>OpenAI (API): completion request prompt: query + relevant docs content
+        OR Server->>OpenAI (API): completion request prompt: base prompt + relevant pdf content + query
         OpenAI (API)-->>Client: text/event-stream: completions response
     end
 ```
